@@ -24,7 +24,7 @@ cxcl13_genes <- c("CXCL13", "CXCR3", "LAG3", "PDCD1", "TOX", "TIGIT", "HAVCR2")
 run_test <- function(scores, variable, dataset, treatment) {
   responder <- scores[[variable]][scores$response == "Responder"]
   nonresponder <- scores[[variable]][scores$response == "Nonresponder"]
-  wilcox <- wilcox.test(responder, nonresponder, conf.int = TRUE, exact = FALSE)
+  wilcox <- wilcox.test(responder, nonresponder, conf.int = TRUE, exact = TRUE)
   effect <- cohen.d(responder, nonresponder)
   data.frame(
     dataset = dataset,

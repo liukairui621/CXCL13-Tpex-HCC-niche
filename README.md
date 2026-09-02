@@ -26,6 +26,8 @@ Rscript scripts/01_import_scrnaseq.R
 
 The `processed_data` directory contains numerical values underlying the final analyses. Raw public data are not redistributed.
 
+Patient-level spatial and small clinical-cohort comparisons use two-sided exact Wilcoxon rank-sum tests. Spot-level spatial tests are descriptive and use the asymptotic approximation because spots are not independent patient-level replicates.
+
 ## Interpretation boundary
 
 The CXCL13-associated exhaustion score is a co-expression score. CXCR3 is included as a T-cell trafficking and effector-state marker; the score does not establish a receptor-mediated mechanism. Spatial spot-level analyses are descriptive. GSE202069 labels are FAD-inferred rather than clinical response labels.

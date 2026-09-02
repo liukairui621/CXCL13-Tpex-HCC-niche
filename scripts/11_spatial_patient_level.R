@@ -46,7 +46,8 @@ lg("Patient-level statistical tests...")
 run_patient_test <- function(df, var) {
   r <- df[[var]][df$response == "Responder"]
   nr <- df[[var]][df$response == "NonResponder"]
-  wt <- wilcox.test(r, nr, conf.int=TRUE, exact=FALSE)
+  # Exact inference is appropriate for the seven independent specimens.
+  wt <- wilcox.test(r, nr, conf.int=TRUE, exact=TRUE)
   cd <- cohen.d(r, nr)
   data.frame(
     variable = var,
@@ -90,7 +91,8 @@ lg("Spot-level descriptive statistics...")
 run_spot_test <- function(df, var) {
   r <- df[[var]][df$response == "Responder"]
   nr <- df[[var]][df$response == "NonResponder"]
-  wt <- wilcox.test(r, nr, conf.int=TRUE)
+  # Spot-level tests are descriptive and use the asymptotic approximation.
+  wt <- wilcox.test(r, nr, conf.int=TRUE, exact=FALSE)
   cd <- cohen.d(r, nr)
   data.frame(
     variable = var,
@@ -179,7 +181,7 @@ make_patient_box <- function(data, y_var, y_lab, title_str) {
     theme(legend.position="none", axis.text.x=element_text(size=11)) +
     stat_compare_means(method="wilcox.test", label="p.format",
                        label.x=1.5, label.y.npc=0.96, size=3.5,
-                       exact=FALSE)
+                       exact=TRUE)
 }
 
 panels <- list(

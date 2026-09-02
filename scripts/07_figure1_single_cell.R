@@ -46,7 +46,7 @@ dev.off()
 cat("Fig1A done\n")
 
 cat("Drawing Fig1B...\n")
-markers <- c("TCF7","CXCR5","SLAMF6","IL7R","SELL","CCR7",
+markers <- c("TCF7","SLAMF6","IL7R","SELL","CCR7",
              "PDCD1","TOX","HAVCR2","LAG3","TIGIT",
              "GZMB","PRF1","IFNG","FOXP3","IL2RA","NKG7","GNLY")
 p1B <- DotPlot(tnk, features=markers, group.by="cellstate",
@@ -62,7 +62,7 @@ dev.off()
 cat("Fig1B done\n")
 
 cat("Drawing Fig1C...\n")
-genes1C <- c("TCF7","PDCD1","CXCR5","SLAMF6","TOX","IL7R")
+genes1C <- c("TCF7","PDCD1","SLAMF6","TOX","IL7R")
 plist <- FeaturePlot(tnk, features=genes1C, ncol=3,
                      order=TRUE, combine=FALSE,
                      cols=c("#F0F0F0","#E41A1C"))
