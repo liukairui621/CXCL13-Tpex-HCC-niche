@@ -1,0 +1,14 @@
+Seurat
+harmony
+monocle3
+SeuratWrappers
+singscore
+survival
+survminer
+GEOquery
+data.table
+dplyr
+ggplot2
+ggpubr
+effsize
+ComplexHeatmap

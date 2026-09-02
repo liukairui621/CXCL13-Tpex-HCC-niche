@@ -1,0 +1,11 @@
+sample_id,gsm_accession,response,tissue,disease,treatment,label_source,timepoint_status
+NR1,GSM8579621,Nonresponder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+NR2,GSM8579622,Nonresponder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+NR3,GSM8579623,Nonresponder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+NR4,GSM8579624,Nonresponder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R1,GSM8579625,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R2,GSM8579626,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R3,GSM8579627,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R4,GSM8579628,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R5,GSM8579629,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated
+R6,GSM8579630,Responder,HCC_tumor,HCC,anti-PD-L1,GEO_metadata_patient_field,not_explicitly_stated

@@ -1,0 +1,11 @@
+sample_id,gsm_accession,response,tissue,disease,treatment,label_source
+A12_949T,GSM6619967,Nonresponder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A16_557T,GSM6619968,Nonresponder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A17_152T,GSM6619966,Nonresponder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A19_16T,GSM6619964,Nonresponder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A19_171T,GSM6619961,Responder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A11_385T,GSM6619965,Nonresponder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A18_440T,GSM6619959,Responder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A19_1T,GSM6619963,Responder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A19_121T,GSM6619962,Responder,tumor,HCC,Nivolumab,GEO_metadata_group_field
+A19_174T,GSM6619960,Responder,tumor,HCC,Nivolumab,GEO_metadata_group_field

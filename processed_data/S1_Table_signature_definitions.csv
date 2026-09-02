@@ -1,0 +1,34 @@
+signature_name,gene,direction,scoring_method,used_in_datasets,notes
+Tpex-like (up),TCF7,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Stem-like CD8+ T cell marker
+Tpex-like (up),SLAMF6,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial","SLAM family, Tpex marker"
+Tpex-like (up),IL7R,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial","IL-7 receptor, T cell survival"
+Tpex-like (up),CCR7,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Homing receptor
+Tpex-like (up),SELL,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Lymph node homing
+Tpex-like (up),CD8A,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",CD8 co-receptor alpha
+Tpex-like (up),CD8B,up,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",CD8 co-receptor beta
+Tpex-like (down),GZMB,down,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Cytotoxic effector
+Tpex-like (down),PRF1,down,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Cytotoxic effector
+Tpex-like (down),HAVCR2,down,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial","TIM-3, exhaustion marker"
+Tpex-like (down),TIGIT,down,singscore (bidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Exhaustion marker
+CXCL13-associated exhaustion,CXCL13,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial","Chemokine, TLS organizer"
+CXCL13-associated exhaustion,CXCR3,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",T-cell trafficking and effector-state marker included in the co-expression score
+CXCL13-associated exhaustion,LAG3,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Immune checkpoint
+CXCL13-associated exhaustion,PDCD1,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial","PD-1, immune checkpoint"
+CXCL13-associated exhaustion,TOX,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",TOX transcription factor
+CXCL13-associated exhaustion,TIGIT,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",Exhaustion marker (shared with Tpex-down)
+CXCL13-associated exhaustion,HAVCR2,up,singscore (unidirectional),"scRNA-seq, TCGA, GSE202069, GSE140901, Spatial",TIM-3 (shared with Tpex-down)
+TLS,CCL19,up,singscore (unidirectional),Spatial only,T zone chemokine
+TLS,CCL21,up,singscore (unidirectional),Spatial only,T zone chemokine
+TLS,CXCL13,up,singscore (unidirectional),Spatial only,B cell zone chemokine
+TLS,LTB,up,singscore (unidirectional),Spatial only,Lymphotoxin beta
+TLS,TNFSF13B,up,singscore (unidirectional),Spatial only,BAFF
+TLS,CR2,up,singscore (unidirectional),Spatial only,Complement receptor
+TLS,SELL,up,singscore (unidirectional),Spatial only,Lymph node homing
+TLS,CD19,up,singscore (unidirectional),Spatial only,B cell marker
+TLS,MS4A1,up,singscore (unidirectional),Spatial only,"CD20, B cell marker"
+SPP1/TAM,SPP1,up,singscore (unidirectional),Spatial only,"Osteopontin, macrophage marker"
+SPP1/TAM,CD163,up,singscore (unidirectional),Spatial only,Scavenger receptor
+SPP1/TAM,TREM2,up,singscore (unidirectional),Spatial only,Myeloid receptor
+SPP1/TAM,LGALS3,up,singscore (unidirectional),Spatial only,Galectin-3
+SPP1/TAM,FN1,up,singscore (unidirectional),Spatial only,Fibronectin
+SPP1/TAM,VEGFA,up,singscore (unidirectional),Spatial only,Angiogenesis

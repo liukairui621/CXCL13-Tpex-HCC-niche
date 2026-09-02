@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated manuscript."
+title: "Spatial and clinical features of a CXCL13-associated immune niche containing progenitor-exhausted CD8 T cells in hepatocellular carcinoma"
+type: software
+authors:
+  - family-names: Chen
+    given-names: Rong
+  - family-names: He
+    given-names: Yaobin
+  - family-names: Huang
+    given-names: Youxing
+  - family-names: Liu
+    given-names: Kairui
+repository-code: "https://github.com/liukairui621/CXCL13-Tpex-HCC-niche"
+license: MIT
+date-released: 2026-09-02
