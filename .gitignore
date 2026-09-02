@@ -6,3 +6,4 @@ results/figures/**
 *.Rhistory
 __pycache__/
 .DS_Store
+submission_figures/*.pdf

@@ -1,0 +1,72 @@
+{
+  "purpose": "Versioned construction of the final PLOS ONE submission layouts",
+  "repository_root": ".",
+  "font_family": [
+    "Arial"
+  ],
+  "python": "3.12.10",
+  "matplotlib": "3.10.9",
+  "pandas": "2.3.3",
+  "numpy": "2.4.6",
+  "figures": {
+    "Fig1.tif": {
+      "sha256": "858ae1673a24bac62772d694d1ea678ed027dc44569c2889a1f406ccdeb00e83",
+      "bytes": 1797362,
+      "pixels": [
+        4252,
+        3570
+      ],
+      "dpi": [
+        600.0,
+        600.0
+      ],
+      "mode": "RGB",
+      "compression": "tiff_lzw"
+    },
+    "Fig6.tif": {
+      "sha256": "4967157c0a8a2d617b41fbbde1be5e1dc1bfc1edc9685b5d0ca4c300661e88e1",
+      "bytes": 981052,
+      "pixels": [
+        4500,
+        3900
+      ],
+      "dpi": [
+        600.0,
+        600.0
+      ],
+      "mode": "RGB",
+      "compression": "tiff_lzw"
+    },
+    "S6_Fig.tif": {
+      "sha256": "ccdd6326441f742cae25100df77b7b4d7003b040757b64d1930d9e3fdf24bc5d",
+      "bytes": 1347044,
+      "pixels": [
+        4500,
+        5100
+      ],
+      "dpi": [
+        600.0,
+        600.0
+      ],
+      "mode": "RGB",
+      "compression": "tiff_lzw"
+    }
+  },
+  "fig1_layout_assets": {
+    "Fig1A_layout.png": "7e414021bb6812f106d4284a5a7e88075535fd8f8bb3c169cee97fd40aee4889",
+    "Fig1B_layout.png": "b4e5c2ac8ac084c9edf6cba176e46f3caa35659c8d7c205c5ed82ae19c2a8256",
+    "Fig1C_layout.png": "b807b8b9fbaedfb3e119aed0641ac68979b6f13556542be090f78a0533c88dfe",
+    "Fig1D_layout.png": "ecbd583190b12ec9e2fcd058aa6cd7b78772cf646988bd27ad6845f92b5bca09"
+  },
+  "displayed_statistics": {
+    "GSE140901_exact_p": 0.01998001998001998,
+    "GSE279750_exact_p": 0.6095238095238096,
+    "GSE140901_log2_exact_p": 0.042624042624042624,
+    "GSE140901_NanoString_exact_p": 0.01998001998001998,
+    "GSE202069_tpex_score_exact_p": 0.008658008658008658,
+    "GSE202069_cxcl13_score_exact_p": 0.05194805194805195,
+    "GSE202069_combined_score_exact_p": 0.6623376623376623,
+    "GSE215011_cxcl13_associated_exhaustion_score_exact_p": 0.30952380952380953,
+    "GSE215011_tpex_score_exact_p": 0.42063492063492064
+  }
+}
