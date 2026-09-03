@@ -1,0 +1,13 @@
+Verified on the analysis server on 2026-09-03
+
+R 4.3.3
+Seurat 5.4.0
+harmony 1.2.4
+monocle3 1.4.26
+singscore 1.22.0
+survival 3.8-6
+ComplexHeatmap 2.18.0
+
+The versions were queried directly with R packageVersion() on the analysis server.
+CURRENT_REPRODUCTION_SESSION_INFO.txt contains the full sessionInfo() output from
+the frozen public-code reproduction environment.

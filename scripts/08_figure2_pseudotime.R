@@ -64,12 +64,15 @@ p2B <- plot_cells(cds, color_cells_by="pseudotime",
                   label_leaves=FALSE, label_branch_points=FALSE,
                   cell_size=0.6) +
   scale_color_gradientn(colors=c("#2166AC","#92C5DE","#F7F7F7",
-                                  "#F4A582","#D6604D","#B2182B")) +
+                                  "#F4A582","#D6604D","#B2182B"),
+                        name="Pseudotime") +
   theme_pub() + ggtitle("Pseudotime")
 tiff(file.path(project_root, "results", "figures", "Fig2B.tiff"), width=2800, height=2400,
      res=300, compression="lzw")
 print(p2B)
 dev.off()
+ggsave(file.path(project_root, "results", "figures", "Fig2B.pdf"), p2B,
+       width=7, height=6, device=cairo_pdf, bg="white")
 cat("Fig2B done\n")
 
 cat("Drawing Fig2C...\n")

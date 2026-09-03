@@ -8,7 +8,6 @@ library(Seurat)
 library(ggplot2)
 library(dplyr)
 library(cowplot)
-library(ggpubr)
 
 theme_pub <- function() {
   theme_classic() +
@@ -94,7 +93,7 @@ print(p3C)
 dev.off()
 cat("Fig3C done\n")
 
-cat("Drawing Fig3D - Treg/Cycling_T vs others...\n")
+cat("Drawing Fig3D - descriptive Treg/Cycling_T comparison...\n")
 meta$group <- ifelse(meta$cellstate %in% c("Treg","Cycling_T"),
                      as.character(meta$cellstate), "Other T/NK")
 meta$group <- factor(meta$group, levels=c("Treg","Cycling_T","Other T/NK"))
@@ -107,13 +106,11 @@ p3D <- ggplot(meta, aes(x=group, y=CXCL13_expr, fill=group)) +
   theme_pub() +
   labs(x="", y="CXCL13 Expression") +
   theme(legend.position="none",
-        axis.text.x=element_text(size=11)) +
-  stat_compare_means(comparisons=list(c("Treg","Other T/NK"),
-                                      c("Cycling_T","Other T/NK")),
-                     method="wilcox.test", label="p.signif",
-                     tip.length=0.01)
+        axis.text.x=element_text(size=11))
 tiff(file.path(project_root, "results", "figures", "Fig3D.tiff"), width=2000, height=2400,
      res=300, compression="lzw")
 print(p3D)
 dev.off()
+ggsave(file.path(project_root, "results", "figures", "Fig3D.pdf"), p3D,
+       width=5, height=5, device=cairo_pdf, bg="white")
 cat("Fig3D done\nFigure 3 complete\n")

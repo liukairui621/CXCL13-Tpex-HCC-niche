@@ -2,7 +2,7 @@
 
 This repository contains the analysis scripts and processed outputs supporting:
 
-> Spatial and clinical features of a CXCL13-associated immune niche containing progenitor-exhausted CD8 T cells in hepatocellular carcinoma
+> Spatial and clinical features of a CXCL13-associated immune niche containing Tpex-like CD8 T cells in hepatocellular carcinoma
 
 ## Study components
 
@@ -33,6 +33,8 @@ Final submission layouts are versioned in `submission_figures`. Fig 6 and S6 Fig
 For the same typography as the archived submission files, install Arial or set `HCC_FIGURE_FONT` to an available metrically compatible font before running script 17. The build manifest records the actual software versions, font, statistics, TIFF properties, and SHA-256 checksums.
 
 For a byte-stable TIFF rebuild, use Python 3.12.10 and install the pinned figure-rendering environment with `pip install -r requirements-figures-lock.txt`. PDF metadata include creation timestamps and are therefore not expected to have stable file hashes.
+
+The primary analysis environment used R 4.3.3 with Seurat 5.4.0, harmony 1.2.4, monocle3 1.4.26, singscore 1.22.0, survival 3.8-6, and ComplexHeatmap 2.18.0. The verified versions are recorded in `processed_data/VERIFIED_SOFTWARE_VERSIONS.txt`.
 
 Patient-level spatial and small clinical-cohort comparisons use two-sided exact Wilcoxon rank-sum tests. Spot-level spatial tests are descriptive and use the asymptotic approximation because spots are not independent patient-level replicates.
 
