@@ -1,0 +1,82 @@
+{
+  "Fig5A_logrank_p": 0.005711290368221088,
+  "Fig5B_logrank_p": 0.47286698147980255,
+  "Fig5C_logrank_p": 0.2920180949917466,
+  "Fig5_n": 422.0,
+  "Fig5_file": {
+    "sha256": "3ff8f6d15a1d1b66ced631da14bef1d3e96d42a16bf24a330a7888cc17387118",
+    "path": "submission_figures\\Fig5.tif",
+    "size_pixels": [
+      4500,
+      4950
+    ],
+    "dpi": [
+      600.0,
+      600.0
+    ],
+    "size_inches": [
+      7.5,
+      8.25
+    ],
+    "mode": "RGB",
+    "compression": "tiff_lzw",
+    "file_size_bytes": 1138844
+  },
+  "S5A_wilcoxon_p": 6.412647927318549e-17,
+  "S5B_wilcoxon_p": 1.5496433127299013e-52,
+  "S5C_wilcoxon_p": 0.0,
+  "S5D_wilcoxon_p": 0.0,
+  "S5E_Responder_rho": -0.12829717551479355,
+  "S5E_Responder_p": 2.170731901945225e-41,
+  "S5E_NonResponder_rho": -0.1371933456257463,
+  "S5E_NonResponder_p": 4.7380479904556085e-28,
+  "S5F_Responder_rho": 0.21891346749955218,
+  "S5F_Responder_p": 7.177523853673596e-119,
+  "S5F_NonResponder_rho": 0.06822052877544496,
+  "S5F_NonResponder_p": 5.307340544004049e-08,
+  "S5G_Responder_rho": 0.22029451267046898,
+  "S5G_Responder_p": 2.1827852306918892e-120,
+  "S5G_NonResponder_rho": 0.05913661733318126,
+  "S5G_NonResponder_p": 2.4186592588956006e-06,
+  "S5_n_spots": 17292.0,
+  "S5_n_responder_spots": 10944.0,
+  "S5_n_nonresponder_spots": 6348.0,
+  "S5_file": {
+    "sha256": "c617d3f6762444f6e2b970c6b38e65e834f2f229d4f6f33e55f91046a59d2fa3",
+    "path": "submission_figures\\S5_Fig.tif",
+    "size_pixels": [
+      4500,
+      5100
+    ],
+    "dpi": [
+      600.0,
+      600.0
+    ],
+    "size_inches": [
+      7.5,
+      8.5
+    ],
+    "mode": "RGB",
+    "compression": "tiff_lzw",
+    "file_size_bytes": 1840544
+  },
+  "declared_font_sizes_pt": {
+    "tick": 8.0,
+    "axis": 8.7,
+    "legend": 8.0,
+    "annotation": 8.0,
+    "title": 9.2,
+    "panel": 12.0
+  },
+  "environment": {
+    "python": "3.12.10",
+    "matplotlib": "3.10.9",
+    "pandas": "2.3.3",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "seaborn": "0.13.2",
+    "font_family": [
+      "Arial"
+    ]
+  }
+}

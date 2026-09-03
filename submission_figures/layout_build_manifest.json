@@ -10,8 +10,8 @@
   "numpy": "2.4.6",
   "figures": {
     "Fig1.tif": {
-      "sha256": "858ae1673a24bac62772d694d1ea678ed027dc44569c2889a1f406ccdeb00e83",
-      "bytes": 1797362,
+      "sha256": "71bc574ddcf47e1e1cb0927b36b79c00137169ea4c1314e672e3c392b3762efd",
+      "bytes": 1796562,
       "pixels": [
         4252,
         3570
@@ -24,8 +24,8 @@
       "compression": "tiff_lzw"
     },
     "Fig6.tif": {
-      "sha256": "4967157c0a8a2d617b41fbbde1be5e1dc1bfc1edc9685b5d0ca4c300661e88e1",
-      "bytes": 981052,
+      "sha256": "a3265dba3f3ca1918bafb3ff3c4ff14ab7f36f3607c9e8166ba6e25e10a42c1a",
+      "bytes": 978784,
       "pixels": [
         4500,
         3900
@@ -38,11 +38,11 @@
       "compression": "tiff_lzw"
     },
     "S6_Fig.tif": {
-      "sha256": "ccdd6326441f742cae25100df77b7b4d7003b040757b64d1930d9e3fdf24bc5d",
-      "bytes": 1347044,
+      "sha256": "874a6c59521d9a3f64a2b844de07301dbcf368fc223f462cd14859d40278abb3",
+      "bytes": 1338888,
       "pixels": [
         4500,
-        5100
+        5250
       ],
       "dpi": [
         600.0,

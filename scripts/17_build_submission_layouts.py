@@ -19,9 +19,10 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 import numpy as np
 import pandas as pd
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 
 RESPONDER = "#F4A261"
@@ -101,15 +102,34 @@ def save_matplotlib_figure(fig, tif_path: Path, pdf_path: Path, dpi: int = 600) 
     preview.unlink()
 
 
+def fig1_panel_font(size: int = 96) -> ImageFont.FreeTypeFont:
+    """Use the configured figure font for the raster-composite panel labels."""
+    family = os.environ.get("HCC_FIGURE_FONT", "Arial")
+    properties = font_manager.FontProperties(family=family, weight="bold")
+    return ImageFont.truetype(font_manager.findfont(properties), size=size)
+
+
 def build_fig1(assets: Path, output: Path) -> Path:
-    """Compose the locked submission geometry from versioned panel exports."""
+    """Compose the locked geometry and normalize embedded C/D panel labels."""
     canvas = Image.new("RGB", FIG1_SIZE, "white")
     for filename, position in FIG1_PANELS.items():
         panel_path = assets / filename
         if not panel_path.exists():
             raise FileNotFoundError(f"Missing Fig 1 layout asset: {panel_path}")
         with Image.open(panel_path) as panel:
-            canvas.paste(panel.convert("RGB"), position)
+            panel_rgb = panel.convert("RGB")
+            # C and D came from different plotting systems. Remove their
+            # embedded letters so the composite can apply one size and baseline.
+            if filename == "Fig1C_layout.png":
+                ImageDraw.Draw(panel_rgb).rectangle((0, 0, 150, 145), fill="white")
+            elif filename == "Fig1D_layout.png":
+                ImageDraw.Draw(panel_rgb).rectangle((35, 65, 175, 225), fill="white")
+            canvas.paste(panel_rgb, position)
+    draw = ImageDraw.Draw(canvas)
+    label_font = fig1_panel_font()
+    label_y = FIG1_PANELS["Fig1C_layout.png"][1] + 34
+    draw.text((42, label_y), "C", font=label_font, fill="black")
+    draw.text((FIG1_PANELS["Fig1D_layout.png"][0] + 42, label_y), "D", font=label_font, fill="black")
     destination = output / "Fig1.tif"
     save_tiff(canvas, destination)
     return destination
@@ -126,6 +146,7 @@ def boxplot_panel(
     panel: str,
     digits: int = 3,
     xlabels: tuple[str, str] = ("Responder", "Nonresponder"),
+    panel_position: tuple[float, float] = (-0.12, 1.10),
 ) -> None:
     groups = [responder, nonresponder]
     bp = ax.boxplot(
@@ -164,12 +185,30 @@ def boxplot_panel(
         style="italic",
         linespacing=1.05,
     )
-    ax.text(-0.12, 1.10, panel, transform=ax.transAxes, fontsize=16, fontweight="bold", va="top")
+    ax.text(
+        *panel_position,
+        panel,
+        transform=ax.transAxes,
+        fontsize=16,
+        fontweight="bold",
+        ha="right",
+        va="top",
+        clip_on=False,
+    )
     ax.spines[["top", "right"]].set_visible(False)
     ax.tick_params(labelsize=8)
 
 
-def forest_panel(ax, data: pd.DataFrame, variable: str, title: str, subtitle: str, color: str, panel: str) -> None:
+def forest_panel(
+    ax,
+    data: pd.DataFrame,
+    variable: str,
+    title: str,
+    subtitle: str,
+    color: str,
+    panel: str,
+    panel_position: tuple[float, float] = (-0.12, 1.10),
+) -> None:
     cohort_order = ["GSE140901", "GSE279750", "GSE215011"]
     subset = data[data["variable"] == variable].copy().set_index("dataset").loc[cohort_order].reset_index()
     y = np.array([2, 1, 0], dtype=float)
@@ -209,7 +248,16 @@ def forest_panel(ax, data: pd.DataFrame, variable: str, title: str, subtitle: st
     ax.set_xlabel("Cohen's d (responder vs nonresponder)", fontsize=8.5)
     ax.set_title(title, fontsize=9.3, pad=28)
     ax.text(0.5, 1.015, subtitle, transform=ax.transAxes, ha="center", va="bottom", fontsize=8, color="#777777", style="italic")
-    ax.text(-0.12, 1.10, panel, transform=ax.transAxes, fontsize=16, fontweight="bold", va="top")
+    ax.text(
+        *panel_position,
+        panel,
+        transform=ax.transAxes,
+        fontsize=16,
+        fontweight="bold",
+        ha="right",
+        va="top",
+        clip_on=False,
+    )
     ax.spines[["top", "right"]].set_visible(False)
     ax.tick_params(labelsize=8)
 
@@ -238,6 +286,7 @@ def build_fig6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
         "CXCL13-associated exhaustion score",
         p_140,
         "A",
+        panel_position=(-0.16, 1.32),
     )
     boxplot_panel(
         fig.add_subplot(grid[0, 1]),
@@ -248,6 +297,7 @@ def build_fig6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
         "CXCL13-associated exhaustion score",
         p_279,
         "B",
+        panel_position=(-0.16, 1.32),
     )
     forest_panel(
         fig.add_subplot(grid[1, 0]),
@@ -257,6 +307,7 @@ def build_fig6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
         "Small cohorts; effect directions are exploratory",
         "#E41A1C",
         "C",
+        panel_position=(-0.16, 1.32),
     )
     forest_panel(
         fig.add_subplot(grid[1, 1]),
@@ -266,6 +317,7 @@ def build_fig6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
         "Direction is inconsistent across cohorts",
         "#377EB8",
         "D",
+        panel_position=(-0.16, 1.32),
     )
     destination = output / "Fig6.tif"
     save_matplotlib_figure(fig, destination, output / "Fig6.pdf")
@@ -291,7 +343,7 @@ def cox_panel(ax, data: pd.DataFrame) -> None:
     ax.set_xlim(-0.15, 3.25)
     ax.set_xlabel("Hazard ratio (95% CI)", fontsize=8)
     ax.set_title("Multivariable Cox sensitivity\nM1: age/sex/stage; M2: + grade", fontsize=9, pad=14, linespacing=1.15)
-    ax.text(-0.18, 1.16, "A", transform=ax.transAxes, fontsize=16, fontweight="bold", va="top")
+    ax.text(-0.19, 1.24, "A", transform=ax.transAxes, fontsize=16, fontweight="bold", ha="right", va="top", clip_on=False)
     ax.spines[["top", "right"]].set_visible(False)
     ax.tick_params(labelsize=8)
 
@@ -326,7 +378,25 @@ def normalization_panel(ax, log2_scores: pd.DataFrame, norm_scores: pd.DataFrame
         offsets = np.linspace(-0.06, 0.06, len(values))
         ax.scatter(position + offsets, values, s=12, color="#222222", zorder=3)
     ax.axvline(3, color="#CCCCCC", linewidth=0.8)
-    ax.set_xticks(positions, ["Responder\nlog2", "Nonresp.\nlog2", "Responder\nNanoString", "Nonresp.\nNanoString"])
+    ax.set_xticks(positions, ["R", "NR", "R", "NR"])
+    ax.text(
+        1.5,
+        -0.16,
+        "log2(count+1)",
+        transform=ax.get_xaxis_transform(),
+        ha="center",
+        va="top",
+        fontsize=7.5,
+    )
+    ax.text(
+        4.5,
+        -0.16,
+        "NanoString",
+        transform=ax.get_xaxis_transform(),
+        ha="center",
+        va="top",
+        fontsize=7.5,
+    )
     ymax = max(max(group) for group in groups)
     ymin = min(min(group) for group in groups)
     span = ymax - ymin
@@ -335,7 +405,7 @@ def normalization_panel(ax, log2_scores: pd.DataFrame, norm_scores: pd.DataFrame
     ax.text(4.5, ymax + 0.16 * span, p_label(p_norm), ha="center", fontsize=8)
     ax.set_ylabel("CXCL13-associated score", fontsize=8)
     ax.set_title("GSE140901 normalization sensitivity", fontsize=9, pad=14)
-    ax.text(-0.12, 1.16, "B", transform=ax.transAxes, fontsize=16, fontweight="bold", va="top")
+    ax.text(-0.18, 1.24, "B", transform=ax.transAxes, fontsize=16, fontweight="bold", ha="right", va="top", clip_on=False)
     ax.spines[["top", "right"]].set_visible(False)
     ax.tick_params(labelsize=8)
     return p_log2, p_norm
@@ -348,15 +418,30 @@ def build_s6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
     fad = pd.read_csv(data_dir / "GSE202069_rerun_scores.csv")
     gse215 = pd.read_csv(data_dir / "GSE215011_signature_scores.csv")
 
-    fig = plt.figure(figsize=(7.5, 8.5), constrained_layout=False)
-    grid = fig.add_gridspec(3, 12, left=0.13, right=0.985, bottom=0.06, top=0.90, hspace=0.82, wspace=1.05)
-    cox_panel(fig.add_subplot(grid[0, 0:6]), cox)
-    p_log2, p_norm = normalization_panel(fig.add_subplot(grid[0, 6:12]), log2_scores, norm_scores)
+    # Build each row as an independent grid. This avoids the accumulated
+    # inter-column spacing of a 12-column parent grid and reserves a clean
+    # gutter for y-axis labels and panel letters.
+    fig = plt.figure(figsize=(7.5, 8.75), constrained_layout=False)
+    outer = fig.add_gridspec(
+        3,
+        1,
+        left=0.155,
+        right=0.985,
+        bottom=0.055,
+        top=0.93,
+        hspace=0.92,
+        height_ratios=[1.10, 1.0, 1.0],
+    )
+    top_grid = outer[0].subgridspec(1, 2, wspace=0.48)
+    middle_grid = outer[1].subgridspec(1, 3, wspace=0.62)
+    bottom_grid = outer[2].subgridspec(1, 2, wspace=0.52)
+    cox_panel(fig.add_subplot(top_grid[0, 0]), cox)
+    p_log2, p_norm = normalization_panel(fig.add_subplot(top_grid[0, 1]), log2_scores, norm_scores)
 
     panels = [
-        (grid[1, 0:4], "tpex_score", "Tpex-like score", "Tpex-like score", "C", 4),
-        (grid[1, 4:8], "cxcl13_score", "CXCL13-associated\nexhaustion score", "CXCL13-associated score", "D", 3),
-        (grid[1, 8:12], "combined_score", "Combined score", "Combined score", "E", 2),
+        (middle_grid[0, 0], "tpex_score", "Tpex-like score", "Tpex-like score", "C", 4),
+        (middle_grid[0, 1], "cxcl13_score", "CXCL13-associated\nexhaustion score", "CXCL13-associated score", "D", 3),
+        (middle_grid[0, 2], "combined_score", "Combined score", "Combined score", "E", 2),
     ]
     statistics: dict[str, float] = {"GSE140901_log2_exact_p": p_log2, "GSE140901_NanoString_exact_p": p_norm}
     for spec, column, title, ylabel, letter, digits in panels:
@@ -374,12 +459,13 @@ def build_s6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
             p_value,
             letter,
             digits,
-            ("FAD-inferred R", "FAD-inferred NR"),
+            ("FAD-inferred\nR", "FAD-inferred\nNR"),
+            panel_position=(-0.17, 1.24),
         )
 
     external = [
-        (grid[2, 1:6], "cxcl13_associated_exhaustion_score", "CXCL13-associated\nexhaustion score", "CXCL13-associated score", "F", 2),
-        (grid[2, 6:11], "tpex_score", "Tpex-like score", "Tpex-like score", "G", 2),
+        (bottom_grid[0, 0], "cxcl13_associated_exhaustion_score", "CXCL13-associated\nexhaustion score", "CXCL13-associated score", "F", 2),
+        (bottom_grid[0, 1], "tpex_score", "Tpex-like score", "Tpex-like score", "G", 2),
     ]
     for spec, column, title, ylabel, letter, digits in external:
         responder = gse215.loc[gse215["response"] == "Responder", column].tolist()
@@ -396,6 +482,7 @@ def build_s6(data_dir: Path, output: Path) -> tuple[Path, dict[str, float]]:
             p_value,
             letter,
             digits,
+            panel_position=(-0.17, 1.24),
         )
 
     destination = output / "S6_Fig.tif"
